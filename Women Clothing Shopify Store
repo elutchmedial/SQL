@@ -1,4 +1,4 @@
--- Create a clothing sotre database
+-- Create a clothing store database
 
 CREATE TABLE store (
     item_id INTEGER PRIMARY KEY,
