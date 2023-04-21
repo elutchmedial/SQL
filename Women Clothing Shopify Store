@@ -1,4 +1,7 @@
--- Create a clothing store database
+-- This project involves the creation of a clothing store database using SQL. The database includes a "store" table with columns for item ID, item name, category, price, quantity, and color. 
+The data is populated using SQL INSERT statements. Various SQL queries are then used to analyze the data, including displaying the entire database ordered by price, 
+finding the total cost of all skirts in the database, and determining the average price of an item in the store. 
+This project demonstrates how SQL can be used to create and manipulate databases for retail businesses.
 
 CREATE TABLE store (
     item_id INTEGER PRIMARY KEY,
