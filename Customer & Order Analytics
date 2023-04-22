@@ -36,11 +36,49 @@ ORDER BY price ASC LIMIT 1
 
 -- What is the total revenue for each product sold in January? 
 
-SELECT SUM(quantity)*price as Revenue ,product
-
+SELECT SUM(quantity)*price as Revenue, product
 FROM BIT_DB.JanSales
-
 GROUP BY product
+
+-- Which locations in New York received at least 3 orders in January, and how many orders did they each receive? (Hint: use HAVING).
+SELECT distinct location, COUNT(ORDERid)
+FROM BIT_DB.JanSales
+WHERE location LIKE '%NY%' AND length(orderid) = 6
+AND orderid <> 'Order ID'
+GROUP BY location
+HAVING count(orderid)>2
+
+-- How many of each type of headphone were sold in February?
+SELECT sum(Quantity) as quantity, Product
+FROM BIT_DB.FebSales 
+WHERE Product like '%Headphones%'
+GROUP BY Product
+
+-- What was the average amount spent per account in February?
+SELECT avg(quantity*price)
+FROM BIT_DB.FebSales Feb
+LEFT JOIN BIT_DB.customers cust
+ON feb.orderid = cust.oderid
+WHERE length(orderid) = 6
+AND orderid <> 'Order ID'
+
+-- What was the average quantity of products purchased per account in February? 
+
+SELECT sum(quantity)/count(cust.acctnum)
+FROM BIT_DB.FebSales Feb
+LEFT JOIN BIT_DB.customers cust
+ON feb.orderid  = cust.orderid
+WHERE length(orderid) = 6
+AND orderid <> 'Order ID'
+
+-- Which product brought in the most revenue in January and how much revenue did it bring in total? 
+
+SELECT product, sum(quantity*price)
+FROM BIT_DB.JanSales
+GROUP BY product
+ORDER BY sum(quantity*price) desc
+LIMIT 1
+
 
 -- Which products were sold in February at 548 Lincoln St, Seattle, WA 98101, how many of each were sold, and what was the total revenue?
 
